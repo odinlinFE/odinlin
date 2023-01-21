@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "declaration": true,
+    "declarationDir": "./types",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      // 根目录中自定义脚本辅助文件路径
+      "@scripts/*": ["./scripts/*"],
+      "@odinlin/utils": ["./packages/utils"],
+      "@odinlin/ag-grid-react": ["./packages/ag-grid-react"]
+    },
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "packages",
+    "playgrounds"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.md",
+    "**/dist"
+  ]
+}

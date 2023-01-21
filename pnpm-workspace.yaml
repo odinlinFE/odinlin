@@ -1,0 +1,5 @@
+packages:
+  # 包括所有在 packages 子目录下的 子包
+  - packages/*
+  # 演练场 子包 集合
+  - playgrounds/*

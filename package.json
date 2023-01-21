@@ -1,0 +1,37 @@
+{
+  "name": "@odinlin/monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@7.6.0",
+  "description": "Common tool library and ag-grid encapsulation",
+  "author": {
+    "name": "Lin Hao",
+    "email": "topazur@163.com",
+    "url": "https://github.com/odinlin"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf packages/*/dist",
+    "lint": "eslint --cache .",
+    "lint:fix": "nr lint --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.34.1",
+    "@antfu/eslint-config-react": "^0.34.1",
+    "@antfu/ni": "^0.18.8",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@type-challenges/utils": "^0.1.1",
+    "@types/node": "^18.11.18",
+    "cross-env": "^7.0.3",
+    "esbuild-register": "^3.4.2",
+    "eslint": "^8.32.0",
+    "rimraf": "^4.1.1",
+    "rollup": "^3.10.0",
+    "rollup-plugin-dts": "^5.1.1",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "typescript": "^4.9.4"
+  },
+  "pnpm": {}
+}

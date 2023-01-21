@@ -1,0 +1,47 @@
+{
+  "name": "@odinlin/utils",
+  "version": "0.0.1",
+  "description": "Opinionated collection of common JavaScript / TypeScript utils",
+  "author": {
+    "name": "Lin Hao",
+    "email": "topazur@163.com",
+    "url": "https://github.com/odinlin"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/odinlin/odinlin/tree/main/packages/utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odinlin/odinlin.git",
+    "directory": "packages/utils"
+  },
+  "bugs": {
+    "url": "https://github.com/odinlin/odinlin/issues"
+  },
+  "keywords": [
+    "regexp",
+    "utils"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.iife.min.js",
+  "jsdelivr": "./dist/index.iife.min.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "command:example": "pnpm <command> --filter @odinlin/utils",
+    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c"
+  },
+  "dependencies": {
+    "await-to-js": "^3.0.0"
+  }
+}

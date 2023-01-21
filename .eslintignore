@@ -1,0 +1,14 @@
+dist/
+node_modules
+node_modules/
+patches/
+types/
+cache/
+.temp
+
+!/.eslintrc.js
+!/rollup.config.js
+
+!packages/.vitepress
+!packages/.dumi
+!.test

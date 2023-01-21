@@ -1,0 +1,17 @@
+{
+  "name": "@odinlin/dumi",
+  "private": true,
+  "description": "react series components",
+  "scripts": {
+    "command:example": "pnpm <command> --filter @odinlin/dumi",
+    "setup": "dumi setup",
+    "prepare": "nr setup",
+    "dev": "dumi dev",
+    "start": "nr dev",
+    "build": "dumi build"
+  },
+  "dependencies": {
+    "@odinlin/utils": "workspace:*",
+    "dumi": "^2.1.4"
+  }
+}
