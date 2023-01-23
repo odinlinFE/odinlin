@@ -1,0 +1,63 @@
+{
+  "name": "@odinlin/ag-grid-react",
+  "version": "0.0.1",
+  "description": "AG Grid React Component",
+  "author": {
+    "name": "Lin Hao",
+    "email": "topazur@163.com",
+    "url": "https://github.com/odinlin"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/odinlin/odinlin/tree/main/packages/ag-grid-react#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odinlin/odinlin.git",
+    "directory": "packages/ag-grid-react"
+  },
+  "bugs": {
+    "url": "https://github.com/odinlin/odinlin/issues"
+  },
+  "keywords": [
+    "ag-grid",
+    "ag-grid-react"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "command:example": "pnpm <command> --filter @odinlin/ag-grid-react",
+    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c"
+  },
+  "peerDependencies": {
+    "ag-grid-community": "~29.0.0",
+    "ag-grid-enterprise": "~29.0.0",
+    "ag-grid-react": "~29.0.0",
+    "antd": ">=5.0.0",
+    "async-validator": ">=4.0.0",
+    "react": "^16.3.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.3.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "~18.0.0",
+    "@types/react-dom": "~18.0.0",
+    "ag-grid-community": "~29.0.0",
+    "ag-grid-enterprise": "~29.0.0",
+    "ag-grid-react": "~29.0.0",
+    "antd": "^5.0.0",
+    "async-validator": "^4.2.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}

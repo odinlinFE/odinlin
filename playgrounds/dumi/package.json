@@ -11,7 +11,18 @@
     "build": "dumi build"
   },
   "dependencies": {
+    "@odinlin/ag-grid-react": "workspace:*",
     "@odinlin/utils": "workspace:*",
-    "dumi": "^2.1.4"
+    "ag-grid-community": "~29.0.0",
+    "ag-grid-enterprise": "~29.0.0",
+    "ag-grid-react": "~29.0.0",
+    "antd": "^5.0.0",
+    "dumi": "^2.1.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/react": "~18.0.0",
+    "@types/react-dom": "~18.0.0"
   }
 }
