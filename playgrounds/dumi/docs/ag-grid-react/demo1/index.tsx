@@ -3,7 +3,7 @@
  * description:
  */
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { AgGridReact, SerialCellRenderer, createSerialColDef } from '@odinlin/ag-grid-react'
+import { AgGridReact, SerialCellRenderer, createSerialColDef, useGridReady } from '@odinlin/ag-grid-react'
 import { LicenseManager } from 'ag-grid-enterprise'
 
 import type { IAgGridRef } from '@odinlin/ag-grid-react'
@@ -20,13 +20,14 @@ const columns = [
     field: 'firstName',
     filter: true,
     cellStyle: { color: 'darkred' },
+    rowGroup: true,
   },
   {
     field: 'lastName',
   },
 ]
 
-const rowDatas = [
+const mockData = [
   {
     id: '1',
     firstName: 'John',
@@ -41,6 +42,7 @@ const rowDatas = [
 
 export default function Index() {
   const gridRef = useRef<IAgGridRef<any> | null>(null)
+  const [_gridReadyRef, onGridReady] = useGridReady()
 
   const [rowData, setRowData] = useState<any[]>([])
   const [columnDefs, setColumnDefs] = useState<any[]>([])
@@ -63,10 +65,10 @@ export default function Index() {
         id: '11',
         firstName: 'Jack',
         lastName: 'Foe',
-      }, ...rowDatas])
+      }, ...mockData])
     }
     else {
-      setRowData(rowDatas)
+      setRowData(mockData)
     }
   }, [])
 
@@ -78,16 +80,24 @@ export default function Index() {
   return (
     <div>
       <p>
-        <button onClick={() => console.log(gridRef.current?.getPureRowData())}>pureRowData</button>
+        <button onClick={() => {
+          console.table(gridRef.current?.getLatestRowData())
+          console.log(_gridReadyRef.current?.api?.getColumnDefs())
+        }}>pureRowData</button>
         <button onClick={() => changeColDef(columnDefs.length <= 2)}>toggleColDef</button>
         <button onClick={() => changeRowData(rowData.length <= 2)}>toggleRowData</button>
       </p>
       <AgGridReact
         ref={gridRef}
         rowKey="id"
+        onGridReady={onGridReady}
         wrapperStyle={{ width: '100%', height: 400 }}
         columnDefs={columnDefs}
         rowData={rowData}
+        animateRows
+        defaultColDef={{
+          resizable: true,
+        }}
       />
     </div>
   )

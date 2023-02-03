@@ -30,7 +30,8 @@ const configs: RollupOptions[] = [
     output: [
       {
         file: createOutputFile('index.mjs'),
-        format: 'esm',
+        // https://rollupjs.org/configuration-options/#output-format
+        format: 'es',
       },
       {
         file: createOutputFile('index.cjs'),
@@ -67,7 +68,7 @@ const configs: RollupOptions[] = [
     ],
     output: {
       file: createOutputFile('index.d.ts'),
-      format: 'esm',
+      format: 'es',
     },
   },
 ]

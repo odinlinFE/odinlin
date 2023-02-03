@@ -1,8 +1,8 @@
-import type { CSSProperties, FC, MutableRefObject } from 'react'
+import type { CSSProperties, FC } from 'react'
 import type { PaginationProps } from 'antd'
-import type { ValidateOption } from 'async-validator'
+import type { ValidateError, ValidateOption } from 'async-validator'
 import type { SharedProps } from 'ag-grid-react'
-import type { ColDef, ColumnApi, GridApi } from 'ag-grid-community'
+import type { ColumnApi, GridApi } from 'ag-grid-community'
 
 // 遍历对象的所有属性
 type Simplify<T> = {
@@ -16,13 +16,26 @@ type SetRequiredOmit<T, K extends keyof T> = Simplify<
   Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>
 >
 
+/** *************************************************/
+
 // rowKey为函数时的类型声明
 export type GetRowKey<RecordType = any> = (record: RecordType) => string
 
 // rowKey类型
 export type RowKey = string | GetRowKey<any>
 
-export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'getRowId' | 'pagination'> {
+// 从onGridReady的event中获取api和columnApi
+export interface IAgGridReadyRef<TData = any> {
+  api: GridApi<TData> | null
+  columnApi: ColumnApi | null
+}
+
+/**
+ * @title AgGridProps
+ * @props 忽略getRowId，通过rowKey替代，方便传入属性名字符串和函数
+ * @props 忽略suppressPaginationPanel和pagination，禁止grid自带分页功能
+ */
+export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'getRowId' | 'suppressPaginationPanel' | 'pagination'> {
   // 使用双标签会报 `children: never[]` 没有声明: AgGridReact应继承SharedProps而不是GridOptions
 
   // 容器类名和样式
@@ -38,8 +51,6 @@ export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'get
   // 是否为编辑状态
   editable?: boolean
 
-  // 序号列覆盖默认配置
-  serialColDef?: ColDef<TData>
   // 放弃grid自带的分页功能（因为内置的分页是rowData数量大于paginationPageSize才会出现分页）
   pagination?: PaginationProps
   paginationRenderer?: FC<PaginationProps>
@@ -47,8 +58,8 @@ export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'get
 
 /** *************************************************/
 
-// 获取grid当前页中的实时数据
-export type GetPureRowDataFunc = () => any[]
+// 获取grid当前页中的最新行数据
+export type GetLatestRowDataFunc = () => any[]
 
 // async-validator校验结果
 export interface ValidateResult {
@@ -60,10 +71,16 @@ export interface ValidateResult {
 // async-validator校验函数
 export type ValidateFunc = (rowData: any[], option?: ValidateOption) => Promise<ValidateResult>
 
+// 数据校验hook返回值
+export interface useGridValidatorReturn {
+  /** @deprecated validateError是内部state，暂不暴露，仅暴露相关方法 */
+  validateError?: Record<string, ValidateError[]>
+  clearValidateError: () => void
+  getValidateError: (rowIdAndColId: string) => ValidateError[] | undefined
+  validate: ValidateFunc
+}
+
 // 暴露给父组件的ref类型
-export interface IAgGridRef<TData = any> {
-  api: MutableRefObject<GridApi<TData> | null>
-  columnApi: MutableRefObject<ColumnApi | null>
-  getPureRowData: GetPureRowDataFunc
-  // validate: ValidateFunc
+export interface IAgGridRef<TData = any> extends useGridValidatorReturn {
+  getLatestRowData: GetLatestRowDataFunc
 }

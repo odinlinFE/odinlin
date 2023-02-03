@@ -7,11 +7,13 @@ import json from '@rollup/plugin-json'
 // import nodeResolve from '@rollup/plugin-node-resolve'
 import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
+import postcss from 'rollup-plugin-postcss'
 
 import type { RollupOptions } from 'rollup'
 
 // 处理输入输出文件
 const input = resolve(__dirname, '../../', 'packages/ag-grid-react/src/index.ts')
+const inputLess = resolve(__dirname, '../../', 'packages/ag-grid-react/src/index.less')
 const createOutputFile = (filename: string) => resolve(__dirname, '../../', 'packages/ag-grid-react/dist', filename)
 
 /**
@@ -33,7 +35,7 @@ const configs: RollupOptions[] = [
     output: [
       {
         file: createOutputFile('index.mjs'),
-        format: 'esm',
+        format: 'es',
       },
       {
         file: createOutputFile('index.cjs'),
@@ -51,7 +53,19 @@ const configs: RollupOptions[] = [
     ],
     output: {
       file: createOutputFile('index.d.ts'),
-      format: 'esm',
+      format: 'es',
+    },
+  },
+  {
+    input: inputLess,
+    external: [],
+    plugins: [
+      postcss({ modules: false, extract: true }),
+    ],
+    output: {
+      file: createOutputFile('index.css'),
+      format: 'es',
+      exports: 'default',
     },
   },
 ]

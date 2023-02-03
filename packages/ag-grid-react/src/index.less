@@ -1,0 +1,34 @@
+.odin-grid-wrapper {
+  .odin-cell {
+    // &-value {}
+
+    &-editable {
+      background-image: linear-gradient(to top left,
+          transparent 0%,
+          transparent 49.9%,
+          var(--cell-edit-color, blue) 50%,
+          var(--cell-edit-color, blue) 100%);
+      background-size: 8px 8px;
+      background-repeat: no-repeat;
+    }
+
+    &-modify {
+      background-image: linear-gradient(to top left,
+          transparent 0%,
+          transparent 49.9%,
+          var(--cell-modify-color, red) 50%,
+          var(--cell-modify-color, red) 100%);
+      background-size: 8px 8px;
+      background-repeat: no-repeat;
+    }
+
+    &-validate-failed::before {
+      content: '';
+      width: 98%;
+      bottom: 0px;
+      border-bottom: 1px dashed #ff4d4f;
+      position: absolute;
+      left: 1%;
+    }
+  }
+}

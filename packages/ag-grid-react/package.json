@@ -21,13 +21,16 @@
     "ag-grid",
     "ag-grid-react"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/index.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
-    }
+    },
+    "./dist/index.css": "./dist/index.css"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
