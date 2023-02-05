@@ -42,7 +42,8 @@
   "scripts": {
     "command:example": "pnpm <command> --filter @odinlin/ag-grid-react",
     "build:locale": "esno ../../scripts/bin/ag-grid-locale.ts",
-    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c"
+    "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c",
+    "release": "bumpp --commit=\"chore(ag-grid-react): release \" --no-tag --push && npm publish --access public"
   },
   "peerDependencies": {
     "ag-grid-community": "~29.0.0",
