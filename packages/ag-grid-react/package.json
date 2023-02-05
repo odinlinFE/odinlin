@@ -41,6 +41,7 @@
   ],
   "scripts": {
     "command:example": "pnpm <command> --filter @odinlin/ag-grid-react",
+    "build:locale": "esno ../../scripts/bin/ag-grid-locale.ts",
     "build:rollup": "cross-env NODE_OPTIONS=\"--max-old-space-size=6144\" rollup -c"
   },
   "peerDependencies": {

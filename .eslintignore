@@ -12,3 +12,6 @@ cache/
 !packages/.vitepress
 !packages/.dumi
 !.test
+
+# biz
+packages/ag-grid-react/src/locales/index.ts

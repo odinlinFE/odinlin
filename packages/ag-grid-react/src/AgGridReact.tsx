@@ -10,6 +10,7 @@ import {
   useGridSize,
   useGridValidator,
   useLatestRowData,
+  useLocale,
 } from './composables'
 import { cloneDeep } from './utils'
 
@@ -76,6 +77,9 @@ const InternalAgGridWrapper: ForwardRefRenderFunction<IAgGridRef, IAgGridProps> 
   // 业务列定义: 根据editable属性，改变列定义是否可编辑
   const bizColumnDefs = useColumnDefs(columnDefsProp, editable)
 
+  // 国际化
+  const [localeText, getLocaleText] = useLocale()
+
   // 默认列定义 (主要是)
   const defaultColDef = useDefaultColDef(
     getClientRowNode,
@@ -118,6 +122,9 @@ const InternalAgGridWrapper: ForwardRefRenderFunction<IAgGridRef, IAgGridProps> 
         defaultColDef={defaultColDef}
         columnDefs={bizColumnDefs}
         rowData={rowData}
+
+        localeText={localeText}
+        getLocaleText={getLocaleText}
 
         {...mergeGridOptions}
       />
