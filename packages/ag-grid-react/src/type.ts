@@ -18,6 +18,10 @@ type SetRequiredOmit<T, K extends keyof T> = Simplify<
 
 /** *************************************************/
 
+export type ICellEditorStyle = [React.CSSProperties | undefined, React.CSSProperties | undefined]
+
+/** *************************************************/
+
 // rowKey为函数时的类型声明
 export type GetRowKey<RecordType = any> = (record: RecordType) => string
 

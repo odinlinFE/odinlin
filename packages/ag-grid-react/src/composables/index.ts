@@ -11,5 +11,8 @@ export { default as useGridOptions } from './useGridOptions'
 export { default as useLatestRowData } from './useLatestRowData'
 export { default as useGridValidator } from './useGridValidator'
 
+// Cell Editor
+export { default as useCellEditorSize } from './useCellEditorSize'
+
 // public
 export { default as useGridReady } from './useGridReady'

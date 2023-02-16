@@ -1,4 +1,6 @@
 .odin-grid-wrapper {
+
+  // 自定义 cell className
   .odin-cell {
     // &-value {}
 
@@ -30,5 +32,118 @@
       position: absolute;
       left: 1%;
     }
+  }
+
+  /**
+   * @title 需求是: Cell Editors 撑满单元格
+   * @deprecated 在wrapper设置cssvar: `containerStyle={{ '--ag-row-height': '40px' }}` => `<div class="ag-theme-alpine" style="height: 100%; --ag-row-height:20px; --ag-line-height:20px;">`
+   * @usage 在row设置cssvar: `getRowStyle['--ag-line-height']` => `<div class="ag-row" style="height: 20px; --ag-line-height:20px;">`
+   */
+  .ag-cell-inline-editing {
+    // height: var(--ag-row-height, '100%');
+    height: var(--ag-line-height, '100%');
+  }
+
+  /** @title Cell Editor */
+  .antd-input-number-cell-editor {
+
+    .ant-input-number-input-wrap,
+    .ant-input-number-input {
+      height: 100%;
+      transition: none;
+    }
+  }
+
+  /** @title Cell Editor */
+  .antd-select-cell-editor {
+    &.ant-select-single {
+
+      &:not(.ant-select-customize-input) {
+
+        .ant-select-selector,
+        .ant-select-selection-search-input {
+          height: 100%;
+          transition: none;
+        }
+
+        .ant-select-selector {
+
+          .ant-select-selection-item,
+          .ant-select-selection-placeholder {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+    &.ant-select-multiple {
+      &:not(.ant-select-customize-input) {
+        .ant-select-selector {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  /** @title Cell Editor */
+  .antd-picker-range-cell-editor-vertical {
+    flex-direction: column;
+    justify-content: center; // 垂直
+    align-items: center; // 水平
+    padding: 0; // 去除外层padding
+    border: none; // 去除外层border
+
+    // 去除 activeBar 和 suffix
+    .ant-picker-active-bar,
+    .ant-picker-suffix {
+      display: none;
+    }
+
+    .ant-picker-input {
+      padding: 4px 11px 4px;
+      // border: `${lineWidth}px ${lineType} ${colorPrimary}`
+      border: 1px solid var(--antd-picker-editor-color-border, #d9d9d9);
+      border-radius: 3px;
+      // transition: `background ${motionDurationMid}, border ${motionDurationMid}`,
+      transition: border 0.2s, box-shadow 0.2s;
+
+      input {
+        // NOTICE: placeholder伪类 会继承 input 的样式
+        // [placeholder伪类](https://www.51cto.com/article/621736.html)
+        // input::placeholder { text-align: center; }
+        text-align: center;
+      }
+    }
+
+    // 非disabled状态下的hover和active
+    &:not(.ant-picker-disabled) {
+      .ant-picker-input {
+
+        &:hover,
+        &-active {
+          // borderColor: token.inputBorderHoverColor,
+          border-color: var(--antd-picker-editor-color-primary-hover, #40a9ff);
+          // borderInlineEndWidth: token.lineWidth,
+          border-inline-end-width: 1px;
+        }
+      }
+    }
+  }
+
+  // font-size: 'calc(var(--ag-font-size) + 1px)'
+  // border-radius: var(--ag-border-radius);
+  // padding-left: var(--ag-grid-size);
+  // background-color: var(--ag-background-color);
+  // border: var(--ag-borders-input) var(--ag-input-border-color);
+
+  // props.api.getDisplayedRowCount
+}
+
+
+/** @title 垂直显示的时间范围选择器的panel去掉三角箭头 */
+.ant-picker-dropdown.antd-picker-dropdown-range-cell-editor-vertical.ant-picker-dropdown-placement-bottomLeft {
+  .ant-picker-range-arrow {
+    display: none;
   }
 }
