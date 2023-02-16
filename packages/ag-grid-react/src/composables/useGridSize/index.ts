@@ -1,6 +1,4 @@
-import { useMemo } from 'react'
-
-import type { CSSProperties } from 'react'
+import * as React from 'react'
 
 /**
  * @title 根据domLayout设置grid容器的宽高，grid将在父元素两个方向上 100% 填充
@@ -11,9 +9,9 @@ import type { CSSProperties } from 'react'
  */
 export default function useGridSize(
   domLayout?: 'normal' | 'autoHeight' | 'print',
-  wrapperStyle?: CSSProperties,
+  wrapperStyle?: React.CSSProperties,
 ) {
-  return useMemo(() => {
+  return React.useMemo(() => {
     if (domLayout === 'autoHeight') {
       return Object.assign({}, wrapperStyle, { height: undefined })
     }

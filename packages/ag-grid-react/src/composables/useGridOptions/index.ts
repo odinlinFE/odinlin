@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import * as React from 'react'
 
 import {
   fullWidthRows,
@@ -20,7 +20,7 @@ import type { GridOptions } from 'ag-grid-community'
  * @returns
  */
 export default function useGridOptions(gridOptions: GridOptions): GridOptions {
-  return useMemo(() => {
+  return React.useMemo(() => {
     return Object.assign(
       {
         // {Default: false} If `true`, 禁用用于分页的默认组件。

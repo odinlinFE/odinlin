@@ -1,8 +1,8 @@
-import type { CSSProperties, FC } from 'react'
+import type * as React from 'react'
 import type { PaginationProps } from 'antd'
-import type { ValidateError, ValidateOption } from 'async-validator'
+import type { Rule, ValidateError, ValidateFieldsError, ValidateOption } from 'async-validator'
 import type { SharedProps } from 'ag-grid-react'
-import type { ColumnApi, GridApi } from 'ag-grid-community'
+import type { ColDef, ColGroupDef, ColumnApi, GridApi } from 'ag-grid-community'
 
 // 遍历对象的所有属性
 type Simplify<T> = {
@@ -30,6 +30,11 @@ export interface IAgGridReadyRef<TData = any> {
   columnApi: ColumnApi | null
 }
 
+/** *************************************************/
+
+// 额外携带校验规则的列定义
+export type ValidateColumnDef<TData = any> = (ColDef<TData> & { rules?: Rule } | ColGroupDef<TData>)
+
 /**
  * @title AgGridProps
  * @props 忽略getRowId，通过rowKey替代，方便传入属性名字符串和函数
@@ -41,7 +46,7 @@ export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'get
   // 容器类名和样式
   wrapperClassName?: string
   // 容器样式(宽高样式必填)
-  wrapperStyle?: SetRequiredOmit<CSSProperties, 'width' | 'height'>
+  wrapperStyle?: SetRequiredOmit<React.CSSProperties, 'width' | 'height'>
 
   // 唯一ID: 替代getRowId
   rowKey: string | GetRowKey<any>
@@ -53,7 +58,7 @@ export interface IAgGridProps<TData = any> extends Omit<SharedProps<TData>, 'get
 
   // 放弃grid自带的分页功能（因为内置的分页是rowData数量大于paginationPageSize才会出现分页）
   pagination?: PaginationProps
-  paginationRenderer?: FC<PaginationProps>
+  paginationRenderer?: React.FC<PaginationProps>
 }
 
 /** *************************************************/
@@ -74,7 +79,7 @@ export type ValidateFunc = (rowData: any[], option?: ValidateOption) => Promise<
 // 数据校验hook返回值
 export interface useGridValidatorReturn {
   /** @deprecated validateError是内部state，暂不暴露，仅暴露相关方法 */
-  validateError?: Record<string, ValidateError[]>
+  validateError?: ValidateFieldsError
   clearValidateError: () => void
   getValidateError: (rowIdAndColId: string) => ValidateError[] | undefined
   validate: ValidateFunc

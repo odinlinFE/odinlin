@@ -1,6 +1,5 @@
-import { useCallback, useRef } from 'react'
+import * as React from 'react'
 
-import type { MutableRefObject } from 'react'
 import type { GridOptions, GridReadyEvent } from 'ag-grid-community'
 import type { IAgGridReadyRef } from '../../type'
 
@@ -10,10 +9,10 @@ import type { IAgGridReadyRef } from '../../type'
  */
 export default function useGridReady(
   onGridReady?: GridOptions['onGridReady'],
-): [MutableRefObject<IAgGridReadyRef>, GridOptions['onGridReady']] {
-  const gridReadyRef = useRef<IAgGridReadyRef>({ api: null, columnApi: null })
+): [React.MutableRefObject<IAgGridReadyRef>, GridOptions['onGridReady']] {
+  const gridReadyRef = React.useRef<IAgGridReadyRef>({ api: null, columnApi: null })
 
-  const _onGridReady = useCallback((event: GridReadyEvent<any>) => {
+  const _onGridReady = React.useCallback((event: GridReadyEvent<any>) => {
     // @ts-expect-error type in GridReadyEvent
     const { api, columnApi, type } = event
     // type: "gridReady"

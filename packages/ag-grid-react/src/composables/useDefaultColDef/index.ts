@@ -1,4 +1,6 @@
-import { useMemo } from 'react'
+import * as React from 'react'
+
+import { getCellEditable } from '../../utils'
 
 import type { ColDef } from 'ag-grid-community'
 import type { useGridValidatorReturn } from '../../type'
@@ -11,17 +13,22 @@ export default function useDefaultColDef<TData = any>(
   getValidateError: useGridValidatorReturn['getValidateError'],
   defaultColDefProp?: ColDef<TData>,
 ) {
-  return useMemo<ColDef<TData>>(() => {
+  return React.useMemo<ColDef<TData>>(() => {
     // 待合并: 默认的ColDef.cellClassRules属性
     const initialCellClassRules: ColDef['cellClassRules'] = {
       'odin-cell-value': 'true',
       'odin-cell-editable': (params) => {
-        return !!params.colDef.editable
+        const { value: _, rowIndex: __, ...restEditableCallbackParams } = params
+
+        const { editable } = params.column.getColDef()
+        return getCellEditable(editable, restEditableCallbackParams)
       },
       'odin-cell-modify': (params) => {
-        const { colDef, column, node, data } = params
+        const { value: _, rowIndex: __, ...restEditableCallbackParams } = params
+        const { column, node, data } = params
 
-        if (!colDef.editable) { return false }
+        const { editable } = column.getColDef()
+        if (!getCellEditable(editable, restEditableCallbackParams)) { return false }
 
         // 判断 '有值与原始值是否相等' 来确定是否编辑过
         const colId = column.getUniqueId()
@@ -33,9 +40,12 @@ export default function useDefaultColDef<TData = any>(
         return data[colId] !== oFind[colId]
       },
       'odin-cell-validate-failed': (params) => {
-        const { colDef, column, node } = params
+        const { value: _, rowIndex: __, ...restEditableCallbackParams } = params
 
-        if (!colDef.editable) { return false }
+        const { column, node } = params
+
+        const { editable } = column.getColDef()
+        if (!getCellEditable(editable, restEditableCallbackParams)) { return false }
 
         const colId = column.getUniqueId()
         // 校验结果中是否存在该cell的错误信息

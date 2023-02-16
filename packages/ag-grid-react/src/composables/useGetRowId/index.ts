@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import * as React from 'react'
 
 import type { GetRowIdFunc } from 'ag-grid-community'
 import type { RowKey } from '../../type'
@@ -15,7 +15,7 @@ import type { RowKey } from '../../type'
  * @defect 目前只能获取对象第一层级路径下的值，不想引入lodash或者自己实现（增加包体积）
  */
 export default function useGetRowId(rowKey: RowKey): GetRowIdFunc {
-  return useCallback((params) => {
+  return React.useCallback((params) => {
     const record = params.data
     if (typeof rowKey === 'string') { return record[rowKey] }
     return rowKey(record)

@@ -1,6 +1,6 @@
 // https://www.ag-grid.com/react-data-grid/row-selection/
 
-import { useMemo } from 'react'
+import * as React from 'react'
 
 import type { ColDef, ICellRendererParams } from 'ag-grid-community'
 
@@ -12,7 +12,7 @@ export const ROW_SELECTION_AND_SERIAL = 'rowSelectionAndSerialNumber'
 export const SerialCellRenderer: React.FC<ICellRendererParams<any, any> & { pagination: any }> = (params) => {
   const { node: { rowIndex }, pagination } = params
 
-  const serialNum = useMemo(() => {
+  const serialNum = React.useMemo(() => {
     const current = pagination?.current
     const pageSize = pagination?.pageSize
     // const total = pagination?.total

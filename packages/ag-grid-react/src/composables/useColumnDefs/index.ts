@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import * as React from 'react'
 
 import { modifyColumnEditableProperty } from '../../utils'
 
@@ -9,7 +9,7 @@ import type { GridOptions } from 'ag-grid-community'
  * @desc 改变ColDef.editable属性，便于切换编辑模式
  */
 export function useColumnDefs(columnDefs: GridOptions['columnDefs'], editable?: boolean) {
-  return useMemo<GridOptions['columnDefs']>(() => {
+  return React.useMemo<GridOptions['columnDefs']>(() => {
     // 直接返回: undefined 或 null
     if (columnDefs === null || columnDefs === undefined) { return columnDefs }
 
